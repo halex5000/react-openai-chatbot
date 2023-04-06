@@ -27,16 +27,11 @@ function HomeBase() {
         <br />
 
         <Typography variant="h2" sx={{ mt: 8 }} className="heroText">
-          Chatbot
+          Chatbot Powered by LaunchDarkly
         </Typography>
-
-        <Typography variant="h2" className="heroText">
-          Powered by LaunchDarkly
-        </Typography>
-      </Grid>
-      <Grid item xs={2}>
         <ChatBot />
       </Grid>
+      <Grid item xs={2}></Grid>
     </Grid>
   );
 }
