@@ -10,6 +10,7 @@ import {
   Grid,
   Stack,
   Paper,
+  Typography,
 } from "@mui/material";
 import { nanoid } from "nanoid";
 import BotIcon from "@mui/icons-material/SmartToyRounded";
@@ -99,48 +100,60 @@ export default function ChatBot() {
           </Button>
         </Grid>
       </Grid>
-      <Paper sx={{ width: "100%", bgcolor: "background.paper" }}>
-        <List>
-          {messages.map((message) => {
-            const label = message.content;
-            const isUser = message.from === "user";
-            const variant = isUser ? "outlined" : "";
-            const color = isUser ? "primary" : "success";
-            return (
-              <ListItem
-                key={message.id}
-                sx={{
-                  ml: isUser ? 0 : "50%",
-                  mr: 5,
-                }}
-              >
-                <Box sx={{ width: "50%" }}>
-                  <Stack direction="row" spacing={1}>
-                    <Chip
-                      label={label}
-                      icon={
-                        message.from === "user" ? (
-                          <SentimentSatisfiedAltIcon sx={{ m: 1 }} />
-                        ) : (
-                          <BotIcon sx={{ m: 1 }} />
-                        )
-                      }
+      <Grid container>
+        <Grid item xs={12}>
+          <Paper sx={{ bgcolor: "background.paper", mt: 2 }}>
+            {messages.length > 0 ? (
+              <List>
+                {messages.map((message) => {
+                  const label = message.content;
+                  const isUser = message.from === "user";
+                  const variant = isUser ? "outlined" : "";
+                  const color = isUser ? "primary" : "success";
+                  return (
+                    <ListItem
+                      key={message.id}
                       sx={{
-                        height: "auto",
-                        "& .MuiChip-label": {
-                          display: "block",
-                          whiteSpace: "normal",
-                        },
+                        ml: isUser ? 0 : "50%",
+                        mr: 5,
                       }}
-                      color={color}
-                    />
-                  </Stack>
-                </Box>
-              </ListItem>
-            );
-          })}
-        </List>
-      </Paper>
+                    >
+                      <Box sx={{ width: "50%" }}>
+                        <Stack direction="row" spacing={1}>
+                          <Chip
+                            label={label}
+                            icon={
+                              message.from === "user" ? (
+                                <SentimentSatisfiedAltIcon sx={{ m: 1 }} />
+                              ) : (
+                                <BotIcon sx={{ m: 1 }} />
+                              )
+                            }
+                            sx={{
+                              height: "auto",
+                              "& .MuiChip-label": {
+                                display: "block",
+                                whiteSpace: "normal",
+                              },
+                            }}
+                            color={color}
+                          />
+                        </Stack>
+                      </Box>
+                    </ListItem>
+                  );
+                })}
+              </List>
+            ) : (
+              <Box sx={{ minHeight: 30 }}>
+                <Typography variant="body">
+                  Your chat will appear here
+                </Typography>
+              </Box>
+            )}
+          </Paper>
+        </Grid>
+      </Grid>
     </Box>
   );
 }
